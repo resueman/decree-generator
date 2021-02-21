@@ -1,0 +1,14 @@
+image: Visual Studio 2019
+
+environment:
+    matrix:
+      - solution_name: DecreeGenerator/DecreeGenerator.sln
+    
+before_build:
+  - nuget restore %solution_name%
+
+build_script:
+  - dotnet build %solution_name%
+
+test_script:
+  - dotnet test %solution_name%
