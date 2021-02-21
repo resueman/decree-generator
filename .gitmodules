@@ -1,0 +1,3 @@
+[submodule "curriculum-parser"]
+	path = curriculum-parser
+	url = https://github.com/resueman/curriculum-parser.git
