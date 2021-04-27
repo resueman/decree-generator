@@ -1,9 +1,0 @@
-C:\Users\User\Desktop\decree-generator\DecreeGenerator\ContingentParser\bin\Release\netcoreapp3.1\ContingentParser.deps.json
-C:\Users\User\Desktop\decree-generator\DecreeGenerator\ContingentParser\bin\Release\netcoreapp3.1\ContingentParser.dll
-C:\Users\User\Desktop\decree-generator\DecreeGenerator\ContingentParser\bin\Release\netcoreapp3.1\ContingentParser.pdb
-C:\Users\User\Desktop\decree-generator\DecreeGenerator\ContingentParser\obj\Release\netcoreapp3.1\ContingentParser.csprojAssemblyReference.cache
-C:\Users\User\Desktop\decree-generator\DecreeGenerator\ContingentParser\obj\Release\netcoreapp3.1\ContingentParser.AssemblyInfoInputs.cache
-C:\Users\User\Desktop\decree-generator\DecreeGenerator\ContingentParser\obj\Release\netcoreapp3.1\ContingentParser.AssemblyInfo.cs
-C:\Users\User\Desktop\decree-generator\DecreeGenerator\ContingentParser\obj\Release\netcoreapp3.1\ContingentParser.csproj.CoreCompileInputs.cache
-C:\Users\User\Desktop\decree-generator\DecreeGenerator\ContingentParser\obj\Release\netcoreapp3.1\ContingentParser.dll
-C:\Users\User\Desktop\decree-generator\DecreeGenerator\ContingentParser\obj\Release\netcoreapp3.1\ContingentParser.pdb
