@@ -37,9 +37,9 @@ namespace ApplicationsParser
         /// </summary>
         /// <param name="blockInfo">Строка с информацией о блоке</param>
         /// <param name="currentClearedCurriculumCode">Код учебного плана без разделителя из файла с заявлениями, заявления которого парсим</param>
-        public override void ParseBlockApplications(string blockInfo, string currentClearedCurriculumCode)
+        public override void ParseBlockApplications(string blockInfo, string currentClearedCurriculumCode, string specialization)
         {
-            if (!TryParseInfoAboutElectiveBlock(blockInfo, currentClearedCurriculumCode, out int semester, out int blockNumber,
+            if (!TryParseInfoAboutElectiveBlock(blockInfo, currentClearedCurriculumCode, specialization, out int semester, out int blockNumber,
                    out string specializationName, out int applicationsCount) || semester != this.semester)
             {
                 return;

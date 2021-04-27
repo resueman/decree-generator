@@ -20,8 +20,9 @@ namespace ApplicationsParser
         private readonly Contingent contingent;
         private readonly string clearedCurriculumCode;
         private protected readonly ICurriculumWithElectiveBlocks curriculum;
-
-        private readonly OpenXmlReader reader;
+        private readonly List<Paragraph> paragraphs;
+        private int paragraphCounter = 0;
+        //private readonly OpenXmlReader reader;
         private readonly string firstHeaderColumnName;
         private readonly int applicationFileColumnsCount;
 
@@ -50,8 +51,8 @@ namespace ApplicationsParser
 
             var wordDocument = WordprocessingDocument.Open(fileName, false);
             var body = wordDocument.MainDocumentPart.Document.Body; 
-            var paragraph = body.Elements<Paragraph>();
-            reader = OpenXmlReader.Create(body);
+            paragraphs = body.Elements<Paragraph>().ToList();
+            //reader = OpenXmlReader.Create(body);
         }
 
         /// <summary>
@@ -61,12 +62,11 @@ namespace ApplicationsParser
         private protected string GetNextLine()
         {
             var text = "";
-            while (reader.Read() && text == "")
+            while (paragraphCounter < paragraphs.Count && text == "")
             {
-                if (reader.ElementType == typeof(Text))
-                {
-                    text = reader.GetText();
-                }
+                text = paragraphs[paragraphCounter].InnerText;
+                ++paragraphCounter;
+
                 if (text == firstHeaderColumnName)
                 {
                     for (var i = 0; i < applicationFileColumnsCount; ++i)
@@ -75,6 +75,20 @@ namespace ApplicationsParser
                     }
                 }
             }
+            //while (reader.Read() && text == "")
+            //{
+            //    if (reader.ElementType == typeof(Text))
+            //    {
+            //        text = reader.GetText();
+            //    }
+            //    if (text == firstHeaderColumnName)
+            //    {
+            //        for (var i = 0; i < applicationFileColumnsCount; ++i)
+            //        {
+            //            text = GetNextLine();
+            //        }
+            //    }
+            //}
             return text;
         }
 
@@ -83,8 +97,9 @@ namespace ApplicationsParser
         /// </summary>
         private protected void ParseApplicationsFile()
         {
-            string currentClearedCurriculumCode = "";
-            while (reader.Read())
+            var specialization = "";
+            var currentClearedCurriculumCode = "";
+            while (paragraphCounter < paragraphs.Count/* reader.Read()*/)
             {
                 var line = GetNextLine();
                 var match = Regex.Match(line, @"([^:]+):\s+(.+)");
@@ -98,10 +113,14 @@ namespace ApplicationsParser
                     case "Учебный план":
                         currentClearedCurriculumCode = ParseClearedCurriculumCode(line);
                         continue;
+                    case "Профиль/Специализация":
+                        var specializationMatch = Regex.Match(match.Groups[2].Value, @"(.+)\(Кол-во=\d+\)");
+                        specialization = specializationMatch.Success ? specializationMatch.Groups[1].Value.Trim() : "";
+                        continue;
                     case "Блок учебного плана":
                         try
                         {
-                            ParseBlockApplications(match.Groups[2].Value, currentClearedCurriculumCode);
+                            ParseBlockApplications(match.Groups[2].Value, currentClearedCurriculumCode, specialization);
                         }
                         catch (Exception e)
                         {
@@ -118,7 +137,7 @@ namespace ApplicationsParser
         /// </summary>
         /// <param name="blockInfo">Строка, содержащая информацию блоке(не обязательно элективном)</param>
         /// <param name="currentClearedCurriculumCode">Код учебного плана без разделителей</param>
-        public abstract void ParseBlockApplications(string blockInfo, string currentClearedCurriculumCode);
+        public abstract void ParseBlockApplications(string blockInfo, string currentClearedCurriculumCode, string specialization);
 
         /// <summary>
         /// Убирает '/', '\' разделители из кода учебного плана
@@ -210,7 +229,8 @@ namespace ApplicationsParser
         /// <returns>True, если дисциплина с заданным русским названием была найдена, в противном случае false</returns>
         private protected bool TryParseDiscipline(string disciplineRussianName, out Discipline discipline)
         {
-            discipline = curriculum.Disciplines.SingleOrDefault(d => d.RussianName == disciplineRussianName);
+            discipline = curriculum.Disciplines.SingleOrDefault(d => string.Compare(d.RussianName, disciplineRussianName, 
+                StringComparison.OrdinalIgnoreCase) == 0);
             if (discipline != null)
             {
                 return true;
@@ -228,7 +248,7 @@ namespace ApplicationsParser
         /// <param name="specialization">Специализация/кафедра</param>
         /// <param name="applicationsCount">Количество заявлений в данном блоке</param>
         /// <returns>True, если блок является элективным и информацию о нем можно распарсить, в противном случае false</returns>
-        private protected bool TryParseInfoAboutElectiveBlock(string blockInfo, string currentClearedCurriculumCode,
+        private protected bool TryParseInfoAboutElectiveBlock(string blockInfo, string currentClearedCurriculumCode, string speclz, 
             out int semester, out int blockNumber, out string specialization, out int applicationsCount)
         {
             // тут различные вариации написания
@@ -254,12 +274,42 @@ namespace ApplicationsParser
                     return true;
                 }
 
-                match = Regex.Match(blockInfo, @"Спецсеминар С(\d{2})\s+\(.+\)\s+\(Кол-во=(\d+)\)");
+                match = Regex.Match(blockInfo, @"по выбору С(\d+)\.(\d+)\s+\(.+\)\s+\(Кол-во=(\d+)\)");
+                if (match.Success)
+                {
+                    semester = int.Parse(match.Groups[1].Value);
+                    blockNumber = int.Parse(match.Groups[2].Value);
+                    specialization = null;
+                    applicationsCount = int.Parse(match.Groups[3].Value);
+                    return true;
+                }
+
+                match = Regex.Match(blockInfo, @"по выбору C(\d{2})\s+\(Кол-во=(\d+)\)");
+                if (match.Success)
+                {
+                    semester = int.Parse(match.Groups[1].Value);
+                    blockNumber = -1;
+                    specialization = speclz;
+                    applicationsCount = int.Parse(match.Groups[2].Value);
+                    return true;
+                }
+
+                match = Regex.Match(blockInfo, @"Спецсеминар С(\d+)\.(\d+)\s+\(.+\)\s+\(Кол-во=(\d+)\)");
                 if (match.Success)
                 {
                     semester = int.Parse(match.Groups[1].Value);
                     blockNumber = -1;
                     specialization = null;
+                    applicationsCount = int.Parse(match.Groups[2].Value);
+                    return true;
+                }
+                // "" "Спецкурс по выбору C09 (Кол-во=8)"
+                match = Regex.Match(blockInfo, @"Спецсеминар С(\d{2})\s+\(.+\)\s+\(Кол-во=(\d+)\)");
+                if (match.Success)
+                {
+                    semester = int.Parse(match.Groups[1].Value);
+                    blockNumber = -1;
+                    specialization = speclz;
                     applicationsCount = int.Parse(match.Groups[2].Value);
                     return true;
                 }
@@ -292,6 +342,11 @@ namespace ApplicationsParser
         /// <returns>Элективный блок из учебого плана, которому принадлежат встретившиеся дисциплины</returns>
         private protected ElectivesBlock DetermineElectiveBlock(string specializationName, HashSet<Discipline> encounteredDisciplines)
         {
+            if (encounteredDisciplines.Count == 0)
+            {
+                return null;
+            }
+
             var blocks = curriculum.ElectiveBlocks;
             var potentialBlocks = specializationName != null
                 ? blocks.Where(b => b.Semester == semester && b.Specialization?.Name == specializationName)
