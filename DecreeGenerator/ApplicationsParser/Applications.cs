@@ -253,6 +253,16 @@ namespace ApplicationsParser
                     applicationsCount = int.Parse(match.Groups[4].Value);
                     return true;
                 }
+
+                match = Regex.Match(blockInfo, @"Спецсеминар С(\d{2})\s+\(.+\)\s+\(Кол-во=(\d+)\)");
+                if (match.Success)
+                {
+                    semester = int.Parse(match.Groups[1].Value);
+                    blockNumber = -1;
+                    specialization = null;
+                    applicationsCount = int.Parse(match.Groups[2].Value);
+                    return true;
+                }
             }
 
             semester = -1;

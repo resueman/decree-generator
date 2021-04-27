@@ -17,6 +17,8 @@ namespace DecreeGenerator
     /// </summary>
     public class DisciplineChoiceApplicationsHandler
     {
+        private int semester;
+
         /// <summary>
         /// Студенты определенного направления из контингента и из списка с заявлениями
         /// </summary>
@@ -84,7 +86,7 @@ namespace DecreeGenerator
         /// <param name="normatives">Нормативы с минимально необходимым и максимально 
         /// возможным числом зачисленных студентов на каждую дисциплину</param>
         public DisciplineChoiceApplicationsHandler(ICurriculumWithElectiveBlocks curriculum, Contingent contingent, 
-            DisciplineChoiceApplications applications, Dictionary<Discipline, (int Min, int Max)> normatives)
+            DisciplineChoiceApplications applications, Dictionary<Discipline, (int Min, int Max)> normatives, int semester)
             : this()
         {
             applicationsWithCorruptedData = applications.Where(a => a.Comment != CommentType.Ok).ToList();
@@ -92,6 +94,7 @@ namespace DecreeGenerator
 
             correctApplications = applications.Where(a => a.Priority > 0 && a.Student.Status != "прер" && a.Comment == CommentType.Ok).ToList();
 
+            this.semester = semester;
             this.curriculum = curriculum;
             this.normatives = normatives;
 
@@ -133,7 +136,7 @@ namespace DecreeGenerator
         /// </summary>
         private void DistributeStudentsToElectives()
         {
-            var blocks = curriculum.ElectiveBlocks.Where(b => b.Disciplines.Count > 1).ToList();
+            var blocks = curriculum.ElectiveBlocks.Where(b => b.Disciplines.Count > 1 && b.Semester == semester).ToList();
             var processedBlockApplicationsTasks = new List<Task<List<DisciplineChoiceApplication>>>();
             foreach (var block in blocks)
             {

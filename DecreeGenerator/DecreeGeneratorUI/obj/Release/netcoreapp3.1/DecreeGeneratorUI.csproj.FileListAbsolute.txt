@@ -1,0 +1,32 @@
+C:\Users\User\Desktop\decree-generator\DecreeGenerator\DecreeGeneratorUI\bin\Release\netcoreapp3.1\Генератор распоряжений.exe
+C:\Users\User\Desktop\decree-generator\DecreeGenerator\DecreeGeneratorUI\bin\Release\netcoreapp3.1\decreePatterns\AnnexPattern.docx
+C:\Users\User\Desktop\decree-generator\DecreeGenerator\DecreeGeneratorUI\bin\Release\netcoreapp3.1\decreePatterns\DecreePattern.docx
+C:\Users\User\Desktop\decree-generator\DecreeGenerator\DecreeGeneratorUI\bin\Release\netcoreapp3.1\decree1.ico
+C:\Users\User\Desktop\decree-generator\DecreeGenerator\DecreeGeneratorUI\bin\Release\netcoreapp3.1\Генератор распоряжений.deps.json
+C:\Users\User\Desktop\decree-generator\DecreeGenerator\DecreeGeneratorUI\bin\Release\netcoreapp3.1\Генератор распоряжений.runtimeconfig.json
+C:\Users\User\Desktop\decree-generator\DecreeGenerator\DecreeGeneratorUI\bin\Release\netcoreapp3.1\Генератор распоряжений.runtimeconfig.dev.json
+C:\Users\User\Desktop\decree-generator\DecreeGenerator\DecreeGeneratorUI\bin\Release\netcoreapp3.1\Генератор распоряжений.dll
+C:\Users\User\Desktop\decree-generator\DecreeGenerator\DecreeGeneratorUI\bin\Release\netcoreapp3.1\Генератор распоряжений.pdb
+C:\Users\User\Desktop\decree-generator\DecreeGenerator\DecreeGeneratorUI\bin\Release\netcoreapp3.1\DocumentFormat.OpenXml.dll
+C:\Users\User\Desktop\decree-generator\DecreeGenerator\DecreeGeneratorUI\bin\Release\netcoreapp3.1\ApplicationsParser.dll
+C:\Users\User\Desktop\decree-generator\DecreeGenerator\DecreeGeneratorUI\bin\Release\netcoreapp3.1\ContingentParser.dll
+C:\Users\User\Desktop\decree-generator\DecreeGenerator\DecreeGeneratorUI\bin\Release\netcoreapp3.1\CurriculumParser.dll
+C:\Users\User\Desktop\decree-generator\DecreeGenerator\DecreeGeneratorUI\bin\Release\netcoreapp3.1\DecreeGenerator.dll
+C:\Users\User\Desktop\decree-generator\DecreeGenerator\DecreeGeneratorUI\bin\Release\netcoreapp3.1\ApplicationsParser.pdb
+C:\Users\User\Desktop\decree-generator\DecreeGenerator\DecreeGeneratorUI\bin\Release\netcoreapp3.1\ContingentParser.pdb
+C:\Users\User\Desktop\decree-generator\DecreeGenerator\DecreeGeneratorUI\bin\Release\netcoreapp3.1\DecreeGenerator.pdb
+C:\Users\User\Desktop\decree-generator\DecreeGenerator\DecreeGeneratorUI\bin\Release\netcoreapp3.1\CurriculumParser.pdb
+C:\Users\User\Desktop\decree-generator\DecreeGenerator\DecreeGeneratorUI\obj\Release\netcoreapp3.1\DecreeGeneratorUI.csprojAssemblyReference.cache
+C:\Users\User\Desktop\decree-generator\DecreeGenerator\DecreeGeneratorUI\obj\Release\netcoreapp3.1\MainWindow.g.cs
+C:\Users\User\Desktop\decree-generator\DecreeGenerator\DecreeGeneratorUI\obj\Release\netcoreapp3.1\App.g.cs
+C:\Users\User\Desktop\decree-generator\DecreeGenerator\DecreeGeneratorUI\obj\Release\netcoreapp3.1\Генератор распоряжений_MarkupCompile.cache
+C:\Users\User\Desktop\decree-generator\DecreeGenerator\DecreeGeneratorUI\obj\Release\netcoreapp3.1\Генератор распоряжений_MarkupCompile.lref
+C:\Users\User\Desktop\decree-generator\DecreeGenerator\DecreeGeneratorUI\obj\Release\netcoreapp3.1\MainWindow.baml
+C:\Users\User\Desktop\decree-generator\DecreeGenerator\DecreeGeneratorUI\obj\Release\netcoreapp3.1\Генератор распоряжений.g.resources
+C:\Users\User\Desktop\decree-generator\DecreeGenerator\DecreeGeneratorUI\obj\Release\netcoreapp3.1\DecreeGeneratorUI.AssemblyInfoInputs.cache
+C:\Users\User\Desktop\decree-generator\DecreeGenerator\DecreeGeneratorUI\obj\Release\netcoreapp3.1\DecreeGeneratorUI.AssemblyInfo.cs
+C:\Users\User\Desktop\decree-generator\DecreeGenerator\DecreeGeneratorUI\obj\Release\netcoreapp3.1\DecreeGeneratorUI.csproj.CoreCompileInputs.cache
+C:\Users\User\Desktop\decree-generator\DecreeGenerator\DecreeGeneratorUI\obj\Release\netcoreapp3.1\DecreeGeneratorUI.csproj.CopyComplete
+C:\Users\User\Desktop\decree-generator\DecreeGenerator\DecreeGeneratorUI\obj\Release\netcoreapp3.1\Генератор распоряжений.dll
+C:\Users\User\Desktop\decree-generator\DecreeGenerator\DecreeGeneratorUI\obj\Release\netcoreapp3.1\Генератор распоряжений.pdb
+C:\Users\User\Desktop\decree-generator\DecreeGenerator\DecreeGeneratorUI\obj\Release\netcoreapp3.1\DecreeGeneratorUI.genruntimeconfig.cache

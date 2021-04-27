@@ -114,7 +114,7 @@ namespace DecreeGeneratorUI
 
                 var disciplineChoiceApplicationsHandler = isDisciplineChangeOption
                     ? new DisciplineChoiceApplicationsHandler(disciplineChoiceApplications)
-                    : new DisciplineChoiceApplicationsHandler(curriculum, contingent, disciplineChoiceApplications, normatives);
+                    : new DisciplineChoiceApplicationsHandler(curriculum, contingent, disciplineChoiceApplications, normatives, int.Parse(semester));
 
                 IncreaseProgressValue(progressChunk);
 

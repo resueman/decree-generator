@@ -1,0 +1,337 @@
+{
+  "version": 3,
+  "targets": {
+    ".NETCoreApp,Version=v3.1": {
+      "DocumentFormat.OpenXml/2.11.3": {
+        "type": "package",
+        "dependencies": {
+          "System.IO.Packaging": "4.7.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/DocumentFormat.OpenXml.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/DocumentFormat.OpenXml.dll": {}
+        }
+      },
+      "System.IO.Packaging/4.7.0": {
+        "type": "package",
+        "compile": {
+          "ref/netstandard2.0/System.IO.Packaging.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/System.IO.Packaging.dll": {}
+        }
+      },
+      "ApplicationsParser/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.1",
+        "dependencies": {
+          "ContingentParser": "1.0.0",
+          "CurriculumParser": "1.0.0",
+          "DocumentFormat.OpenXml": "2.11.3"
+        },
+        "compile": {
+          "bin/placeholder/ApplicationsParser.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/ApplicationsParser.dll": {}
+        }
+      },
+      "ContingentParser/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.1",
+        "dependencies": {
+          "DocumentFormat.OpenXml": "2.11.3"
+        },
+        "compile": {
+          "bin/placeholder/ContingentParser.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/ContingentParser.dll": {}
+        }
+      },
+      "CurriculumParser/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.1",
+        "dependencies": {
+          "DocumentFormat.OpenXml": "2.11.3"
+        },
+        "compile": {
+          "bin/placeholder/CurriculumParser.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/CurriculumParser.dll": {}
+        }
+      },
+      "DecreeGenerator/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.1",
+        "dependencies": {
+          "ApplicationsParser": "1.0.0",
+          "ContingentParser": "1.0.0",
+          "DocumentFormat.OpenXml": "2.11.3"
+        },
+        "compile": {
+          "bin/placeholder/DecreeGenerator.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/DecreeGenerator.dll": {}
+        }
+      }
+    },
+    ".NETCoreApp,Version=v3.1/win-x64": {
+      "DocumentFormat.OpenXml/2.11.3": {
+        "type": "package",
+        "dependencies": {
+          "System.IO.Packaging": "4.7.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/DocumentFormat.OpenXml.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/DocumentFormat.OpenXml.dll": {}
+        }
+      },
+      "System.IO.Packaging/4.7.0": {
+        "type": "package",
+        "compile": {
+          "ref/netstandard2.0/System.IO.Packaging.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/System.IO.Packaging.dll": {}
+        }
+      },
+      "ApplicationsParser/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.1",
+        "dependencies": {
+          "ContingentParser": "1.0.0",
+          "CurriculumParser": "1.0.0",
+          "DocumentFormat.OpenXml": "2.11.3"
+        },
+        "compile": {
+          "bin/placeholder/ApplicationsParser.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/ApplicationsParser.dll": {}
+        }
+      },
+      "ContingentParser/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.1",
+        "dependencies": {
+          "DocumentFormat.OpenXml": "2.11.3"
+        },
+        "compile": {
+          "bin/placeholder/ContingentParser.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/ContingentParser.dll": {}
+        }
+      },
+      "CurriculumParser/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.1",
+        "dependencies": {
+          "DocumentFormat.OpenXml": "2.11.3"
+        },
+        "compile": {
+          "bin/placeholder/CurriculumParser.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/CurriculumParser.dll": {}
+        }
+      },
+      "DecreeGenerator/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.1",
+        "dependencies": {
+          "ApplicationsParser": "1.0.0",
+          "ContingentParser": "1.0.0",
+          "DocumentFormat.OpenXml": "2.11.3"
+        },
+        "compile": {
+          "bin/placeholder/DecreeGenerator.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/DecreeGenerator.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "DocumentFormat.OpenXml/2.11.3": {
+      "sha512": "dCugN386ka+LwcOHnxi4gUHbiDeIw0/GEYw1sXFhYiErGFbJpRpscRcn5b12dywUReFCOgGNJ/l16zG5udkC/A==",
+      "type": "package",
+      "path": "documentformat.openxml/2.11.3",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "documentformat.openxml.2.11.3.nupkg.sha512",
+        "documentformat.openxml.nuspec",
+        "icon.png",
+        "lib/net35/DocumentFormat.OpenXml.dll",
+        "lib/net35/DocumentFormat.OpenXml.xml",
+        "lib/net40/DocumentFormat.OpenXml.dll",
+        "lib/net40/DocumentFormat.OpenXml.xml",
+        "lib/net46/DocumentFormat.OpenXml.dll",
+        "lib/net46/DocumentFormat.OpenXml.xml",
+        "lib/netstandard1.3/DocumentFormat.OpenXml.dll",
+        "lib/netstandard1.3/DocumentFormat.OpenXml.xml",
+        "lib/netstandard2.0/DocumentFormat.OpenXml.dll",
+        "lib/netstandard2.0/DocumentFormat.OpenXml.xml"
+      ]
+    },
+    "System.IO.Packaging/4.7.0": {
+      "sha512": "9VV4KAbgRQZ79iEoG40KIeZy38O30oWwewScAST879+oki8g/Wa2HXZQgrhDDxQM4GkP1PnRJll05NMiVPbYAw==",
+      "type": "package",
+      "path": "system.io.packaging/4.7.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.TXT",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/net46/System.IO.Packaging.dll",
+        "lib/net46/System.IO.Packaging.xml",
+        "lib/netstandard1.3/System.IO.Packaging.dll",
+        "lib/netstandard1.3/System.IO.Packaging.xml",
+        "lib/netstandard2.0/System.IO.Packaging.dll",
+        "lib/netstandard2.0/System.IO.Packaging.xml",
+        "ref/net46/System.IO.Packaging.dll",
+        "ref/net46/System.IO.Packaging.xml",
+        "ref/netstandard1.3/System.IO.Packaging.dll",
+        "ref/netstandard1.3/System.IO.Packaging.xml",
+        "ref/netstandard2.0/System.IO.Packaging.dll",
+        "ref/netstandard2.0/System.IO.Packaging.xml",
+        "system.io.packaging.4.7.0.nupkg.sha512",
+        "system.io.packaging.nuspec",
+        "useSharedDesignerContext.txt",
+        "version.txt"
+      ]
+    },
+    "ApplicationsParser/1.0.0": {
+      "type": "project",
+      "path": "../ApplicationsParser/ApplicationsParser.csproj",
+      "msbuildProject": "../ApplicationsParser/ApplicationsParser.csproj"
+    },
+    "ContingentParser/1.0.0": {
+      "type": "project",
+      "path": "../ContingentParser/ContingentParser.csproj",
+      "msbuildProject": "../ContingentParser/ContingentParser.csproj"
+    },
+    "CurriculumParser/1.0.0": {
+      "type": "project",
+      "path": "../../curriculum-parser/CurriculumParser/CurriculumParser.csproj",
+      "msbuildProject": "../../curriculum-parser/CurriculumParser/CurriculumParser.csproj"
+    },
+    "DecreeGenerator/1.0.0": {
+      "type": "project",
+      "path": "../DecreeGenerator/DecreeGenerator.csproj",
+      "msbuildProject": "../DecreeGenerator/DecreeGenerator.csproj"
+    }
+  },
+  "projectFileDependencyGroups": {
+    ".NETCoreApp,Version=v3.1": [
+      "ApplicationsParser >= 1.0.0",
+      "ContingentParser >= 1.0.0",
+      "DecreeGenerator >= 1.0.0"
+    ]
+  },
+  "packageFolders": {
+    "C:\\Users\\User\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {},
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+  },
+  "project": {
+    "version": "1.0.0",
+    "restore": {
+      "projectUniqueName": "C:\\Users\\User\\Desktop\\decree-generator\\DecreeGenerator\\DecreeGeneratorUI\\DecreeGeneratorUI.csproj",
+      "projectName": "Генератор распоряжений",
+      "projectPath": "C:\\Users\\User\\Desktop\\decree-generator\\DecreeGenerator\\DecreeGeneratorUI\\DecreeGeneratorUI.csproj",
+      "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\User\\Desktop\\decree-generator\\DecreeGenerator\\DecreeGeneratorUI\\obj\\publish\\win-x64\\",
+      "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
+        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+      ],
+      "configFilePaths": [
+        "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+      ],
+      "originalTargetFrameworks": [
+        "netcoreapp3.1"
+      ],
+      "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "https://api.nuget.org/v3/index.json": {}
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
+          "projectReferences": {
+            "C:\\Users\\User\\Desktop\\decree-generator\\DecreeGenerator\\ApplicationsParser\\ApplicationsParser.csproj": {
+              "projectPath": "C:\\Users\\User\\Desktop\\decree-generator\\DecreeGenerator\\ApplicationsParser\\ApplicationsParser.csproj"
+            },
+            "C:\\Users\\User\\Desktop\\decree-generator\\DecreeGenerator\\ContingentParser\\ContingentParser.csproj": {
+              "projectPath": "C:\\Users\\User\\Desktop\\decree-generator\\DecreeGenerator\\ContingentParser\\ContingentParser.csproj"
+            },
+            "C:\\Users\\User\\Desktop\\decree-generator\\DecreeGenerator\\DecreeGenerator\\DecreeGenerator.csproj": {
+              "projectPath": "C:\\Users\\User\\Desktop\\decree-generator\\DecreeGenerator\\DecreeGenerator\\DecreeGenerator.csproj"
+            }
+          }
+        }
+      },
+      "warningProperties": {
+        "warnAsError": [
+          "NU1605"
+        ]
+      }
+    },
+    "frameworks": {
+      "netcoreapp3.1": {
+        "targetAlias": "netcoreapp3.1",
+        "imports": [
+          "net461",
+          "net462",
+          "net47",
+          "net471",
+          "net472",
+          "net48"
+        ],
+        "assetTargetFallback": true,
+        "warn": true,
+        "downloadDependencies": [
+          {
+            "name": "Microsoft.AspNetCore.App.Runtime.win-x64",
+            "version": "[3.1.13, 3.1.13]"
+          },
+          {
+            "name": "Microsoft.NETCore.App.Runtime.win-x64",
+            "version": "[3.1.13, 3.1.13]"
+          },
+          {
+            "name": "Microsoft.WindowsDesktop.App.Runtime.win-x64",
+            "version": "[3.1.13, 3.1.13]"
+          }
+        ],
+        "frameworkReferences": {
+          "Microsoft.NETCore.App": {
+            "privateAssets": "all"
+          },
+          "Microsoft.WindowsDesktop.App.WPF": {
+            "privateAssets": "none"
+          }
+        },
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.201\\RuntimeIdentifierGraph.json"
+      }
+    },
+    "runtimes": {
+      "win-x64": {
+        "#import": []
+      }
+    }
+  }
+}

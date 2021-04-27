@@ -45,7 +45,7 @@ namespace ContingentParser
 
             var sheetData = worksheet.Elements<SheetData>().First();
             var rows = sheetData.Elements<Row>().ToList();
-            for (var i = 1; i < rows.Count(); ++i)
+            for (var i = 1; i < rows.Count() - 1; ++i)
             {
                 var j = 0;
                 var cells = rows[i].Elements<Cell>().ToList();
