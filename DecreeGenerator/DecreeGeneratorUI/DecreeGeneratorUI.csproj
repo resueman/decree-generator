@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <ApplicationIcon>decree1.ico</ApplicationIcon>
+    <AssemblyName>Генератор распоряжений</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ApplicationsParser\ApplicationsParser.csproj" />
+    <ProjectReference Include="..\ContingentParser\ContingentParser.csproj" />
+    <ProjectReference Include="..\DecreeGenerator\DecreeGenerator.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="decree1.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>
