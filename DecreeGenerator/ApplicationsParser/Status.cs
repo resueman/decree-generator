@@ -8,6 +8,7 @@
     {
         New,
         Approved,
-        Rejected
+        Rejected,
+        Outdated
     }
 }

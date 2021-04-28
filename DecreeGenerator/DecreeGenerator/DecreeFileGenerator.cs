@@ -75,7 +75,7 @@ namespace DecreeGenerator
             var encounteredComments = nonProcessed.Select(p => p.Comment).Distinct().ToList();
             foreach (var comment in encounteredComments)
             {
-                var students = nonProcessed.Where(p => p.Comment == comment).Select(p => p.Student).ToList();
+                var students = nonProcessed.Where(p => p.Comment == comment).Select(p => p.Student).Distinct().ToList();
                 AppendLine(body, DefineCommentTypeDescription(comment));
                 foreach (var student in students)
                 {

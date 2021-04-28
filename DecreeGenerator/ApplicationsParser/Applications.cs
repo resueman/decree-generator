@@ -175,6 +175,7 @@ namespace ApplicationsParser
                 "Новая" => Status.New,
                 "Утверждена" => Status.Approved,
                 "Отклонена" => Status.Rejected,
+                "Недействительна" => Status.Outdated,
                 _ => throw new Exception($"Недопустимое значение '{status}' в колонке 'Статус'. " +
                 $"Проверьте файл с заявлениями на соответсвие установленному формату")
             };
@@ -207,9 +208,7 @@ namespace ApplicationsParser
                     {
                         return student; 
                     }
-                    var splittedFullName = studentName.Split(' ', 3);
-                    var (surname, name, patronimic) = (splittedFullName[0], splittedFullName[1], splittedFullName[2]);
-                    student = new Student(surname, name, patronimic, curriculum.Programme.LevelOfEducation,
+                    student = new Student(studentName, "", "", curriculum.Programme.LevelOfEducation,
                         curriculum.Programme.Code, curriculum.CurriculumCode.Replace("/", @"\"), "студ");
                     
                     studentsExistedInApplicationsNotInContingent.Add(student);
@@ -251,10 +250,31 @@ namespace ApplicationsParser
         private protected bool TryParseInfoAboutElectiveBlock(string blockInfo, string currentClearedCurriculumCode, string speclz, 
             out int semester, out int blockNumber, out string specialization, out int applicationsCount)
         {
+            if (blockInfo.Contains("язык") || blockInfo.Contains("нгллийский") || blockInfo.Contains("изическая") || blockInfo.Contains("спорт"))
+            {
+                semester = -1;
+                blockNumber = -1;
+                specialization = null;
+                applicationsCount = -1;
+
+                var applicationsCountMatch = Regex.Match(blockInfo, @"\(Кол-во=(\d+)\)");
+                if (applicationsCountMatch.Success)
+                {
+                    applicationsCount = int.Parse(applicationsCountMatch.Groups[1].Value);
+                }
+
+                for (var i = 0; i < applicationsCount * applicationFileColumnsCount; ++i)
+                {
+                    GetNextLine();
+                }
+
+                return false;
+            }
+
             // тут различные вариации написания
             if (clearedCurriculumCode == currentClearedCurriculumCode)
             {
-                var match = Regex.Match(blockInfo, @"по выбору С(\d{2})_(\d+)\s+\(.+\){1}?\s+\(Кол-во=(\d+)\)");
+                var match = Regex.Match(blockInfo, @"по выбору С\s*(\d+)_(\d+)\s+\(.+\){1}?\s+\(Кол-во=(\d+)\)");
                 if (match.Success)
                 {
                     semester = int.Parse(match.Groups[1].Value);
@@ -264,7 +284,7 @@ namespace ApplicationsParser
                     return true;
                 }
 
-                match = Regex.Match(blockInfo, @"Спецкурс\s+(\d+)\.(\d+)\s+по\s+профилю\s+([^(]+)\s+\(Кол-во=(\d+)\)");
+                match = Regex.Match(blockInfo, @".*курс\s+(\d+)\.(\d+)\s+по\s+профилю\s+([^(]+)\s+\(Кол-во=(\d+)\)");
                 if (match.Success)
                 {
                     semester = int.Parse(match.Groups[1].Value);
@@ -274,7 +294,8 @@ namespace ApplicationsParser
                     return true;
                 }
 
-                match = Regex.Match(blockInfo, @"по выбору С(\d+)\.(\d+)\s+\(.+\)\s+\(Кол-во=(\d+)\)");
+                // @"по выбору С(\d+)\.(\d+)\s+\(.+\)\s+\(Кол-во=(\d+)\)"
+                match = Regex.Match(blockInfo, @"по выбору .*С(\d+)\.(\d+) .*\(Кол-во=(\d+)\)");
                 if (match.Success)
                 {
                     semester = int.Parse(match.Groups[1].Value);
@@ -284,7 +305,7 @@ namespace ApplicationsParser
                     return true;
                 }
 
-                match = Regex.Match(blockInfo, @"по выбору C(\d{2})\s+\(Кол-во=(\d+)\)");
+                match = Regex.Match(blockInfo, @"по выбору .*C(\d+) .*\(Кол-во=(\d+)\)");
                 if (match.Success)
                 {
                     semester = int.Parse(match.Groups[1].Value);
@@ -294,7 +315,28 @@ namespace ApplicationsParser
                     return true;
                 }
 
-                match = Regex.Match(blockInfo, @"Спецсеминар С(\d+)\.(\d+)\s+\(.+\)\s+\(Кол-во=(\d+)\)");
+                match = Regex.Match(blockInfo, @"по выбору .*С(\d+) .*\(Кол-во=(\d+)\)");
+                if (match.Success)
+                {
+                    semester = int.Parse(match.Groups[1].Value);
+                    blockNumber = -1;
+                    specialization = speclz;
+                    applicationsCount = int.Parse(match.Groups[2].Value);
+                    return true;
+                }
+
+                //"Курс по выбору С06 (1 из 8) (Кол-во=64)"
+                match = Regex.Match(blockInfo, @"по выбору .*C (\d+).*\(Кол-во=(\d+)\)");
+                if (match.Success)
+                {
+                    semester = int.Parse(match.Groups[1].Value);
+                    blockNumber = -1;
+                    specialization = speclz;
+                    applicationsCount = int.Parse(match.Groups[2].Value);
+                    return true;
+                }
+
+                match = Regex.Match(blockInfo, @"по выбору .*Семестр (\d+) .*\(Кол-во=(\d+)\)");
                 if (match.Success)
                 {
                     semester = int.Parse(match.Groups[1].Value);
@@ -303,13 +345,43 @@ namespace ApplicationsParser
                     applicationsCount = int.Parse(match.Groups[2].Value);
                     return true;
                 }
-                // "" "Спецкурс по выбору C09 (Кол-во=8)"
-                match = Regex.Match(blockInfo, @"Спецсеминар С(\d{2})\s+\(.+\)\s+\(Кол-во=(\d+)\)");
+
+                match = Regex.Match(blockInfo, @".*семинар .*С(\d+)\.(\d+) .*\(Кол-во=(\d+)\)");
+                if (match.Success)
+                {
+                    semester = int.Parse(match.Groups[1].Value);
+                    blockNumber = -1;
+                    specialization = null;
+                    applicationsCount = int.Parse(match.Groups[2].Value);
+                    return true;
+                }
+
+                match = Regex.Match(blockInfo, @".*семинар .+С(\d+) .*\(Кол-во=(\d+)\)");
                 if (match.Success)
                 {
                     semester = int.Parse(match.Groups[1].Value);
                     blockNumber = -1;
                     specialization = speclz;
+                    applicationsCount = int.Parse(match.Groups[2].Value);
+                    return true;
+                }
+
+                match = Regex.Match(blockInfo, @"(\d+)(.+)\(Кол-во=(\d+)\)");
+                if (match.Success)
+                {
+                    semester = -1;
+                    blockNumber = -1;
+                    specialization = match.Groups[2].Value.Trim();
+                    applicationsCount = int.Parse(match.Groups[3].Value);
+                    return true;
+                }
+
+                match = Regex.Match(blockInfo, @"(.+)\(Кол-во=(\d+)\)");
+                if (match.Success)
+                {
+                    semester = -1;
+                    blockNumber = -1;
+                    specialization = match.Groups[1].Value.Trim();
                     applicationsCount = int.Parse(match.Groups[2].Value);
                     return true;
                 }
@@ -320,10 +392,10 @@ namespace ApplicationsParser
             specialization = null;
             applicationsCount = -1;
 
-            var applicationsCountMatch = Regex.Match(blockInfo, @"\(Кол-во=(\d+)\)");
-            if (applicationsCountMatch.Success)
+            var match1 = Regex.Match(blockInfo, @"\(Кол-во=(\d+)\)");
+            if (match1.Success)
             {
-                applicationsCount = int.Parse(applicationsCountMatch.Groups[1].Value);
+                applicationsCount = int.Parse(match1.Groups[1].Value);
             }
 
             for (var i = 0; i < applicationsCount * applicationFileColumnsCount; ++i)
@@ -347,14 +419,31 @@ namespace ApplicationsParser
                 return null;
             }
 
+            var discToRemove = new List<Discipline>();
+            foreach (var d in encounteredDisciplines)
+            {
+                if (d.Implementations.Count(i => i.Semester == semester) == 0)
+                {
+                    discToRemove.Add(d);
+                }
+            }
+            discToRemove.ForEach(d => encounteredDisciplines.Remove(d));
+
             var blocks = curriculum.ElectiveBlocks;
-            var potentialBlocks = specializationName != null
+            var potentialBlocks = !string.IsNullOrEmpty(specializationName)
                 ? blocks.Where(b => b.Semester == semester && b.Specialization?.Name == specializationName)
                 : blocks.Where(b => b.Semester == semester);
 
             var electivesBlock = potentialBlocks
-                .SingleOrDefault(b => encounteredDisciplines
-                    .All(d => b.Disciplines.Select(p => p.Discipline).Contains(d)));
+            .FirstOrDefault(b => encounteredDisciplines
+                .All(d => b.Disciplines.Select(p => p.Discipline).Contains(d)));
+
+            //// weak
+            //if (electivesBlock == null)
+            //{
+            //    electivesBlock = potentialBlocks.SingleOrDefault(b => encounteredDisciplines
+            //    .Any(d => b.Disciplines.Select(p => p.Discipline).Contains(d)));
+            //}
 
             if (electivesBlock == null)
             {
